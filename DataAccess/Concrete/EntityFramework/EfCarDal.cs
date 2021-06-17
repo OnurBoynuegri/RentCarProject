@@ -13,10 +13,12 @@ namespace DataAccess.Concrete.EntityFramework
     {
         public void Add(Car entity)
         {
+
             using (RentCarDBContext context = new RentCarDBContext())
             {
                 var addedEntity = context.Entry(entity);
                 addedEntity.State = EntityState.Added;
+                context.SaveChanges();
             }
         }
 
@@ -26,6 +28,7 @@ namespace DataAccess.Concrete.EntityFramework
             {
                 var deletedEntity = context.Entry(entity);
                 deletedEntity.State = EntityState.Deleted;
+                context.SaveChanges();
             }
         }
 
@@ -53,7 +56,10 @@ namespace DataAccess.Concrete.EntityFramework
             {
                 var updatedEntity = context.Entry(entity);
                 updatedEntity.State = EntityState.Modified;
+                context.SaveChanges();
             }
         }
     }
+
+
 }

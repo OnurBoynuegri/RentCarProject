@@ -29,6 +29,11 @@ namespace DataAccess.Concrete.InMemory
             _cars.Add(car);
         }
 
+        public void Add(Car entity, Expression<Func<Car, bool>> filter = null)
+        {
+            throw new NotImplementedException();
+        }
+
         public void Delete(Car car)
         {
             Car carToDelete = _cars.SingleOrDefault(c => c.CarId == car.CarId);
