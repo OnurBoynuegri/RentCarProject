@@ -14,10 +14,24 @@ namespace ConsoleUI
             CarManager carManager = new CarManager(new EfCarDal());
             //AddCar(carManager);
             //DeleteCarById(carManager);
-            foreach (var cars in carManager.GetCarDetails())
+            GetCarDetail(carManager);
+        }
+
+        private static void GetCarDetail(CarManager carManager)
+        {
+            var result = carManager.GetCarDetails();
+            if (result.Success == true)
             {
-                Console.WriteLine("{0}--{1}--{2}--{3}", cars.CarModel, cars.DailyPrice,cars.BrandName,cars.ColorName);
+                foreach (var cars in result.Data)
+                {
+                    Console.WriteLine("{0}--{1}--{2}--{3}", cars.CarModel, cars.DailyPrice, cars.BrandName, cars.ColorName);
+                }
             }
+            else
+            {
+                Console.WriteLine(result.Message);
+            }
+
         }
 
         private static void AddCar(CarManager carManager)
@@ -27,8 +41,8 @@ namespace ConsoleUI
 
         private static void DeleteCarById(CarManager carManager)
         {
-            
-            carManager.Delete(carManager.GetById(5));
+
+            carManager.Delete(carManager.GetById(5).Data);
         }
     }
 }
