@@ -1,10 +1,14 @@
 ﻿using Business.Abstract;
 using Business.Constants;
+using Business.ValidationRules.FluentValidation;
+using Core.CrossCuttingConcerns.Validation.FluentValidation;
 using Core.Results.Abstract;
 using Core.Results.Concrete;
 using DataAccess.Abstract;
 using Entities.Concrete;
 using Entities.DTOs;
+using FluentValidation;
+using FluentValidation.Results;
 using System;
 using System.Collections.Generic;
 using System.Text;
@@ -22,10 +26,7 @@ namespace Business.Concrete
 
         public IResult Add(Car car)
         {
-            if (car.DailyPrice <= 0 && car.CarModel.Length < 2)
-            {
-                return new ErrorResult(Messages.InvalidAdd);
-            }
+            ValidationTool.Validate(new CarValidator(), car);
             _carDal.Add(car);
             return new Result(true, Messages.CarAdded);
 
