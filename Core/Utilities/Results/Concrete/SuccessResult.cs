@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.Text;
 
-namespace Core.Results.Concrete
+namespace Core.Utilities.Results.Concrete
 {
     public class SuccessResult : Result
     {
